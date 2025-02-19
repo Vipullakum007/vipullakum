@@ -19,18 +19,18 @@ const Projects = () => {
       techStack: ["Django", "Python", "PostgreSQL"],
       category: "fullstack",
       image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=500&fit=crop",
-      github: "#",
-      demo: "#"
+      github: "https://github.com/Vipullakum007/DocScheduler",
+      demo: "https://github.com/Vipullakum007/DocScheduler"
     },
     {
       id: 2,
       title: "Car Rental System",
       description: "Full-stack car rental application using Spring Boot and Hibernate. Includes booking management, payment integration, and admin dashboard.",
-      techStack: ["Spring Boot", "Java", "Hibernate", "MySQL"],
+      techStack: ["Spring Boot", "Java", "Hibernate", "MySQL", "ThyemeLeaf"],
       category: "backend",
       image: "https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=800&h=500&fit=crop",
-      github: "#",
-      demo: "#"
+      github: "https://github.com/Vipullakum007/CarRentelApp",
+      demo: "https://github.com/Vipullakum007/CarRentelApp"
     },
     {
       id: 3,
@@ -39,8 +39,8 @@ const Projects = () => {
       techStack: ["HTML", "CSS", "JavaScript", "SQL"],
       category: "frontend",
       image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=500&fit=crop",
-      github: "#",
-      demo: "#"
+      github: "https://github.com/Vipullakum007/Expense-Income-Tracker",
+      demo: "https://expense-income-tracker-7.netlify.app/"
     },
     {
       id: 4,
@@ -49,8 +49,18 @@ const Projects = () => {
       techStack: ["MongoDB", "Express", "React", "Node.js"],
       category: "fullstack",
       image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=500&fit=crop",
-      github: "#",
-      demo: "#"
+      github: "https://github.com/Vipullakum007/CoCode",
+      demo: "https://github.com/Vipullakum007/CoCode"
+    },
+    {
+      id: 5,
+      title: "Classync",
+      description: "",
+      techStack: ["React", "SpringBoot", "ML"],
+      category: "fullstack",
+      image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=500&fit=crop",
+      github: "https://github.com/Kris0011/Classync",
+      demo: "https://github.com/Kris0011/Classync"
     }
   ];
 
@@ -115,8 +125,8 @@ const Projects = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className={`flex items-center gap-2 px-6 py-3 rounded-full transition-all ${activeFilter === filter.id
-                    ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30'
-                    : 'bg-white dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:shadow-md'
+                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30'
+                  : 'bg-white dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:shadow-md'
                   }`}
               >
                 <filter.icon className="w-5 h-5" />

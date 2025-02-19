@@ -9,7 +9,7 @@ const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState({
-    name: '',
+    user_name: '',
     email: '',
     message: ''
   });
@@ -37,7 +37,7 @@ const Contact = () => {
       icon: Linkedin,
       label: "LinkedIn",
       value: "Connect with me",
-      link: "#"
+      link: "https://www.linkedin.com/in/vipul-lakum-114043252/"
     }
   ];
 
@@ -48,23 +48,39 @@ const Contact = () => {
     }));
   };
 
+  const resetForm = () => {
+    setFormData({
+      user_name: '',
+      email: '',
+      message: ''
+    });
+    if (formRef.current) {
+      formRef.current.reset();
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formRef.current) return;
 
     setIsSubmitting(true);
-    
+
     try {
       await emailjs.sendForm(
-        'YOUR_SERVICE_ID',
-        'YOUR_TEMPLATE_ID',
+        'service_ext8ndk',
+        'template_51xpojd',
         formRef.current,
-        'YOUR_PUBLIC_KEY'
+        'LHFewshSbvFPHwcSY'
       );
-      setSubmitted(true);
       toast.success('Message sent successfully!');
-      setFormData({ name: '', email: '', message: '' });
+      resetForm();
+      // Show success message briefly
+      setSubmitted(true);
+      setTimeout(() => {
+        setSubmitted(false);
+      }, 3000);
     } catch (error) {
+      console.log(error);
       toast.error('Failed to send message. Please try again.');
     } finally {
       setIsSubmitting(false);
@@ -93,19 +109,6 @@ const Contact = () => {
     }
   };
 
-  const successVariants = {
-    hidden: { scale: 0, opacity: 0 },
-    visible: {
-      scale: 1,
-      opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 200,
-        damping: 20
-      }
-    }
-  };
-
   const inputClasses = "w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 outline-none transition-shadow placeholder-transparent";
   const labelClasses = "absolute left-4 -top-2.5 px-1 text-sm text-gray-600 dark:text-gray-400 bg-white dark:bg-gray-700 transition-all";
 
@@ -129,104 +132,98 @@ const Contact = () => {
           <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Contact Form */}
             <motion.div variants={itemVariants}>
-              <AnimatePresence mode="wait">
-                {submitted ? (
-                  <motion.div
-                    variants={successVariants}
-                    initial="hidden"
-                    animate="visible"
-                    className="bg-white dark:bg-gray-700 p-8 rounded-lg shadow-lg text-center"
-                  >
-                    <CheckCircle2 className="w-16 h-16 mx-auto text-green-500 mb-4" />
-                    <h3 className="text-2xl font-bold mb-2 dark:text-white">Thank You!</h3>
-                    <p className="text-gray-600 dark:text-gray-300 mb-6">
-                      Your message has been sent successfully. I'll get back to you soon!
-                    </p>
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={() => setSubmitted(false)}
-                      className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-                    >
-                      Send Another Message
-                    </motion.button>
-                  </motion.div>
-                ) : (
-                  <form
-                    ref={formRef}
-                    onSubmit={handleSubmit}
-                    className="space-y-6 bg-white dark:bg-gray-700 p-8 rounded-lg shadow-lg"
-                  >
-                    <motion.div variants={itemVariants} className="relative">
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                        placeholder="Name"
-                        className={inputClasses}
-                      />
-                      <label htmlFor="name" className={labelClasses}>Name</label>
-                    </motion.div>
-                    
-                    <motion.div variants={itemVariants} className="relative">
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                        placeholder="Email"
-                        className={inputClasses}
-                      />
-                      <label htmlFor="email" className={labelClasses}>Email</label>
-                    </motion.div>
-                    
-                    <motion.div variants={itemVariants} className="relative">
-                      <textarea
-                        id="message"
-                        name="message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        required
-                        rows={4}
-                        placeholder="Message"
-                        className={inputClasses + " resize-none"}
-                      ></textarea>
-                      <label htmlFor="message" className={labelClasses}>Message</label>
-                    </motion.div>
+              <form
+                ref={formRef}
+                onSubmit={handleSubmit}
+                className="space-y-6 bg-white dark:bg-gray-700 p-8 rounded-lg shadow-lg"
+              >
+                <motion.div variants={itemVariants} className="relative">
+                  <input type="hidden" name="contact_number" value={Math.floor(Math.random() * 100000)} />
+                </motion.div>
 
-                    <motion.button
-                      type="submit"
-                      disabled={isSubmitting}
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      className="w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg hover:shadow-blue-500/30 flex items-center justify-center gap-2"
-                    >
-                      {isSubmitting ? (
-                        <>
-                          <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                          Sending...
-                        </>
-                      ) : (
-                        <>
-                          <Send className="w-5 h-5" />
-                          Send Message
-                        </>
-                      )}
-                    </motion.button>
-                  </form>
+                <motion.div variants={itemVariants} className="relative">
+                  <input
+                    type="text"
+                    id="user_name"
+                    name="user_name"
+                    value={formData.user_name}
+                    onChange={handleChange}
+                    required
+                    placeholder="Name"
+                    className={inputClasses}
+                  />
+                  <label htmlFor="user_name" className={labelClasses}>Name</label>
+                </motion.div>
+
+                <motion.div variants={itemVariants} className="relative">
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    placeholder="Email"
+                    className={inputClasses}
+                  />
+                  <label htmlFor="email" className={labelClasses}>Email</label>
+                </motion.div>
+
+                <motion.div variants={itemVariants} className="relative">
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    rows={4}
+                    placeholder="Message"
+                    className={inputClasses + " resize-none"}
+                  ></textarea>
+                  <label htmlFor="message" className={labelClasses}>Message</label>
+                </motion.div>
+
+                <motion.button
+                  type="submit"
+                  disabled={isSubmitting}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg hover:shadow-blue-500/30 flex items-center justify-center gap-2"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-5 h-5" />
+                      Send Message
+                    </>
+                  )}
+                </motion.button>
+
+                {/* Success Message Overlay */}
+                {submitted && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="absolute inset-0 flex items-center justify-center bg-white/90 dark:bg-gray-800/90 rounded-lg"
+                  >
+                    <div className="text-center">
+                      <CheckCircle2 className="w-16 h-16 mx-auto text-green-500 mb-4" />
+                      <p className="text-gray-800 dark:text-white font-medium">Message sent successfully!</p>
+                    </div>
+                  </motion.div>
                 )}
-              </AnimatePresence>
+              </form>
             </motion.div>
 
             {/* Contact Info */}
             <motion.div
               variants={itemVariants}
-              className="grid grid-cols-1 md:grid-cols-2 gap-6"
+              className="grid md:grid-cols-1 gap-6"
             >
               {contactInfo.map((item, index) => (
                 <motion.a

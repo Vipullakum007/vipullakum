@@ -10,16 +10,10 @@ const Achievements = () => {
       link: "https://leetcode.com/vipul_lakum_02"
     },
     {
-      title: "CodeChef Rating: 1422",
+      title: "CodeChef Rating: 1465",
       description: "Active competitive programmer",
       icon: Trophy,
       link: "https://www.codechef.com/users/vipul_lakum"
-    },
-    {
-      title: "Hackathon Participation",
-      description: "DUHACKS 3.0",
-      icon: Award,
-      link: "#"
     }
   ];
 
@@ -28,7 +22,7 @@ const Achievements = () => {
       <div className="container mx-auto px-6">
         <h2 className="text-3xl font-bold text-center mb-12 dark:text-white">Achievements</h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {achievements.map((achievement, index) => (
             <a
               key={index}

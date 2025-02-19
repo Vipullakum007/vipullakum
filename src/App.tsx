@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Moon, Sun, Github, Mail, MapPin, Code2, BookOpen, Trophy, Briefcase } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Moon, Sun } from 'lucide-react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -9,7 +9,11 @@ import Achievements from './components/Achievements';
 import Contact from './components/Contact';
 
 function App() {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true); // Default to dark mode
+
+  useEffect(() => {
+    document.documentElement.classList.add('dark'); // Ensure dark mode on mount
+  }, []);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
@@ -25,7 +29,7 @@ function App() {
       >
         {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
       </button>
-      
+
       <Header />
       <main>
         <Hero />
