@@ -129,7 +129,7 @@ const Hero = () => {
                 Hire Me
               </motion.a>
               <motion.a
-                href="https://drive.google.com/file/d/1GwMhv9aXIqEUSout8Syb4QnNF9ySTZlL/view?usp=sharing"
+                href="https://drive.google.com/file/d/1aHVthcgDXAFveSEuxu4Wrcbcr7EslHmA/view?usp=sharing"
                 download="Vipul_Lakum_Resume.pdf"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
